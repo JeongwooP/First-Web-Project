@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>로그인페이지</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+  <style>
+    *{
+      /*모든 태그에 다 먹인다.*/
+      font-family: 'Noto Sans KR', sans-serif;
+    }
+    .mytitle {
+      background-color: green;
+
+      width: 300px;
+      height: 200px;
+
+      color: white;
+
+      text-align: center;
+
+      background-image: url("https://www.ancient-origins.net/sites/default/files/field/image/Agesilaus-II-cover.jpg");
+      background-size: cover;
+      background-position: center;
+      /*위 3줄은 같이 자주 쓰임*/
+
+      border-radius: 10px;
+
+      padding-top: 20px;
+
+      /*
+      padding 안에서부터 거리를 둔다.
+      margin 밖에서부터 거리를 둔다.
+      margin-left: 10px; 이렇게도 되지만
+      margin: 20px 0px 5px 10px; 이런식도 된다.
+      margin: 위 오른쪽 아래쪽 왼쪽
+       */
+    }
+
+    .wrap {
+      width: 300px;
+      margin: auto;
+    }
+
+    .mybtn {
+      width: 100px;
+      margin: auto;
+      display: block;
+    }
+
+    .gray-font {
+      /*color: gray;*/
+      /* 주석은 ctrl + / */
+      font-size: 16px
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="mytitle">
+      <h1>로그인 페이지</h1>
+      <h5>아이디, 패스워드를 입력해주세요</h5>
+    </div>
+
+    <p>ID: <input type="text" /></p>
+    <p>PW: <input type="text"/></p>
+    <button class="mybtn gray-font">로그인하기</button>
+  </div>
+</body>
+</html>
