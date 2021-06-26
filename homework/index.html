@@ -51,10 +51,34 @@
             font-weight: normal;
         }
 
+        .blue{
+            color: blue;
+        }
+
     </style>
     <script>
+        $(document).ready(function () {
+            q1();
+        });
+
         function order(){
             alert('주문이 완료되었습니다.')
+        }
+
+        function q1() {
+            $.ajax({
+                type: "GET",
+                url: "https://api.manana.kr/exchange/rate.json",
+                data: {},
+                success: function (response) {
+                    $('#bank').empty();
+                    let rate = response[1]['rate']
+                    console.log(rate)
+                    temp_html = `<p class = "blue">달러-원 환율: ${rate}</p>`
+
+                    $('#bank').append(temp_html);
+                }
+            })
         }
     </script>
 </head>
@@ -64,6 +88,7 @@
         <img src="https://www.costco.co.kr/medias/sys_master/images/h86/hee/26559195840542.jpg" alt="JBL speaker">
         <h3>스피커 팝니다<span class = "price"> 가격:246,000원/개</span></h3>
         <p>좋은 블루투스 스피커입니다. 음질, 휴대성, 디자인까지 갖춘 좋은 제품입니다. 추천드립니다.</p>
+        <div id = "bank"></div>
         <div class="input-group mb-3">
             <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">주문자 이름</span>
