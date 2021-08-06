@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+
+    <title>스파르타코딩클럽 | 부트스트랩 연습하기</title>
+
+    <meta property="og:title" content="원페이지 쇼핑몰" />
+    <meta property="og:description" content="Frostman's first shopping website" />
+    <meta property="og:image" content="{{ url_for('static', filename='ogimage.jpg') }}" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+
+    <style>
+        img {
+            width: 100%;
+            height: 100%;
+        }
+
+        h3 {
+            font-weight: bold;
+        }
+
+        .btn {
+            margin: auto;
+            display: block;
+        }
+
+        * {
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+
+        .frame {
+            width: 25%;
+            margin: auto;
+            /*background-image: url("https://www.costco.co.kr/medias/sys_master/images/h86/hee/26559195840542.jpg");*/
+        }
+
+        .price {
+            font-size: 15px;
+            font-weight: normal;
+        }
+
+        .blue {
+            color: blue;
+        }
+
+    </style>
+    <script>
+        $(document).ready(function () {
+            q1();
+            viewOrder();
+        });
+
+        function saveOrder() {
+            let name = $('#order-name').val()
+            let amount = $('#order-amount').val()
+            let address = $('#order-address').val()
+            let phone = $('#order-phone').val()
+
+            console.log(name, amount, address, phone)
+
+            $.ajax({
+                type: "POST",
+                url: "/order",
+                data: {name_give: name, amount_give: amount, address_give: address, phone_give: phone},
+                success: function (response) { // 성공하면
+                    alert(response["msg"]);
+                    window.location.reload()
+                }
+            })
+        }
+
+        function viewOrder() {
+            $.ajax({
+                type: "GET",
+                url: "/order",
+                data: {},
+                success: function (response) {
+                    let lists = response['all_lists']
+                    for (let i = 0; i < lists.length; i++) {
+                        let name = lists[i]['name']
+                        let amount = lists[i]['amount']
+                        let address = lists[i]['address']
+                        let phone = lists[i]['phone']
+
+                        console.log(name, amount)
+
+                        let temp_html = `<tr>
+                                            <th scope="row">${name}</th>
+                                            <td>${amount}</td>
+                                            <td>${address}</td>
+                                            <td>${phone}</td>
+                                        </tr>`
+                        $('#body').append(temp_html)
+                    }
+                }
+            })
+        }
+
+        function q1() {
+            $.ajax({
+                type: "GET",
+                url: "https://api.manana.kr/exchange/rate.json",
+                data: {},
+                success: function (response) {
+                    $('#bank').empty();
+                    let rate = response[1]['rate']
+                    console.log(rate)
+                    temp_html = `<p class = "blue">달러-원 환율: ${rate}</p>`
+
+                    $('#bank').append(temp_html);
+                }
+            })
+        }
+    </script>
+</head>
+
+<body>
+<div class="frame">
+    <img src="https://www.costco.co.kr/medias/sys_master/images/h86/hee/26559195840542.jpg" alt="JBL speaker">
+    <h3>스피커 팝니다<span class="price"> 가격:246,000원/개</span></h3>
+    <p>좋은 블루투스 스피커입니다. 음질, 휴대성, 디자인까지 갖춘 좋은 제품입니다. 추천드립니다.</p>
+    <div id="bank"></div>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">주문자 이름</span>
+        </div>
+        <input id="order-name" type="text" class="form-control" placeholder="Username" aria-label="Username"
+               aria-describedby="basic-addon1">
+    </div>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <label class="input-group-text" for="inputGroupSelect01">수량</label>
+        </div>
+        <select class="custom-select" id="order-amount">
+            <option selected>--수량을 선택하세요--</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+        </select>
+    </div>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon2">주소</span>
+        </div>
+        <input id="order-address" type="text" class="form-control" placeholder="Address" aria-label="Username"
+               aria-describedby="basic-addon1">
+    </div>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon3">전화번호</span>
+        </div>
+        <input id="order-phone" type="text" class="form-control" placeholder="Phone number" aria-label="Username"
+               aria-describedby="basic-addon1">
+    </div>
+    <button onclick="saveOrder()" type="button" class="btn btn-primary">주문하기</button>
+    <br>
+    <div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">이름</th>
+                <th scope="col">수량</th>
+                <th scope="col">주소</th>
+                <th scope="col">전화번호</th>
+            </tr>
+            </thead>
+            <tbody id="body">
+            </tbody>
+        </table>
+    </div>
+
+</div>
+</body>
+
+</html>
