@@ -20,10 +20,12 @@ with HTML, CSS, Javascript, JQuery, Ajax, Flask, MongoDB, PyMongo, Requests, bs4
 
 * book review: 책에 관한 정보를 저장할 수 있는 웹페이지
 	* 책의 제목, 저자, 리뷰(최대 140자)를 작성할 수 있다. 저장한 항목들이 화면에 출력된다.
+	
 ![20210807_001837_6](https://user-images.githubusercontent.com/20348923/128533568-5a17d21d-d865-48f6-bce3-6ed46de3465f.png)
 ![20210807_001837_7](https://user-images.githubusercontent.com/20348923/128533570-48b498f4-e4d3-4f5d-8e64-c2693ee4753b.png)
 
 * movie stars list: 세계 유명 영화 배우의 선호도를 매기는 웹페이지
 	* 네이버 영화 사이트의 상위 50위 영화 배우들을 불러와 출력한다. 좋아요 버튼을 눌러 좋아요 수를 늘릴 수 있으며 좋아요 수가 많을 수록 위에 정보가 위치된다. 삭제 버튼으로 배우 정보를 삭제할 수 있다.
+
 ![20210807_001837_8](https://user-images.githubusercontent.com/20348923/128533571-2d6d8993-87ef-49be-9626-b9fae8248d3e.png)
 ![20210807_001837_9](https://user-images.githubusercontent.com/20348923/128533575-260c7184-6d1c-4d08-b3ee-0001490d55ed.png)
