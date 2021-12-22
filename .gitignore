@@ -139,3 +139,8 @@ cython_debug/
 
 # Pycharm directory
 .idea/
+
+*.png
+*.jpg
+강의노트
+결과 자료

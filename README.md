@@ -1,6 +1,6 @@
-# 스파르타코딩클럽의 웹개발종합반 결과물
+# 웹개발 결과물
 
-SpartaCodingClub Web basic class materials
+Web programming materials
 with HTML, CSS, Javascript, JQuery, Ajax, Flask, MongoDB, PyMongo, Requests, bs4, Bootstrap
 
 * small shopping mall: 자신만의 상품을 파는 웹페이지
